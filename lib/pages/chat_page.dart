@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:chat/widgets/chat_message.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,13 +26,13 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
           title: Column(
             children: <Widget>[
               CircleAvatar(
-                child: Text('Te', style: TextStyle(fontSize: 12)),
-                backgroundColor: Colors.blue[100],
+                child: Text('Lu', style: TextStyle(fontSize: 12)),
+                backgroundColor: Color.fromARGB(255, 193, 217, 236),
                 maxRadius: 14,
               ),
               SizedBox(height: 3),
               Text(
-                'Ralph Schumacher',
+                'Lucas Korkotasvilli',
                 style: TextStyle(color: Colors.black87, fontSize: 12),
               )
             ],
@@ -104,9 +105,14 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     if (texto.length == 0) return;
     _focusNode.requestFocus();
     _textController.clear();
-
+    final rand = Random().nextInt(10);
+    final String user;
+    if (rand > 5)
+      user = '123';
+    else
+      user = '433';
     final newMessage = new ChatMessage(
-      uid: '123',
+      uid: user,
       texto: texto,
       animationController: AnimationController(
           vsync: this, duration: Duration(milliseconds: 200)),
