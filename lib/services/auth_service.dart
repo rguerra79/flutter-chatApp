@@ -32,7 +32,7 @@ class AuthService with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> login(String email, String password) async {
+  Future<bool?> login(String email, String password) async {
     this.autenticando = true;
     final data = {'email': email, 'password': password};
 
@@ -40,9 +40,7 @@ class AuthService with ChangeNotifier {
 
     final resp = await http.post(uri,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-    // print(resp.body);
     this.autenticando = false;
-    print(this.autenticando);
     if (resp.statusCode == 200) {
       final loginResponse = loginResponseFromJson(resp.body);
       this.usuario = loginResponse.usuario;
@@ -63,7 +61,6 @@ class AuthService with ChangeNotifier {
 
     final resp = await http.post(uri,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-    print(resp.body);
     this.autenticando = false;
 
     if (resp.statusCode == 200) {
@@ -89,7 +86,6 @@ class AuthService with ChangeNotifier {
       'Content-Type': 'application/json',
       'x-token': token.toString()
     });
-    //print(resp.body);
 
     if (resp.statusCode == 200) {
       final loginResponse = loginResponseFromJson(resp.body);
